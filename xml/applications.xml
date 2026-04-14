@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications>
+<application>
+<id>11</id>
+<internship_title>Animations</internship_title>
+<company_name>tech</company_name>
+<student>
+<full_name>preethis</full_name>
+<email>p@gmail.com</email>
+<phone>9876543210</phone>
+<education>Bachelor</education>
+<branch>cse</branch>
+<semester>2027-01-01</semester>
+<skills>Fsd</skills>
+<experience>commn</experience>
+</student>
+<applied_date>2026-04-04 17:26:00.0</applied_date>
+<status>Accepted</status>
+<resume>uploads/preethiresume.pdf</resume>
+</application>
+<application>
+<id>7</id>
+<internship_title>ui/ux</internship_title>
+<company_name>tech</company_name>
+<student>
+<full_name>jee</full_name>
+<email>jee@gmail.com</email>
+<phone>9876543210</phone>
+<education>Bachelor</education>
+<branch>cse</branch>
+<semester>2027-01-01</semester>
+<skills>web tech</skills>
+<experience>commn</experience>
+</student>
+<applied_date>2026-03-30 14:42:47.0</applied_date>
+<status>Pending</status>
+<resume>uploads/preethiresume.pdf</resume>
+</application>
+<application>
+<id>6</id>
+<internship_title>ui/ux</internship_title>
+<company_name>tech</company_name>
+<student>
+<full_name>preethis</full_name>
+<email>p@gmail.com</email>
+<phone>9876543210</phone>
+<education>Bachelor</education>
+<branch>cse</branch>
+<semester>2026-01-01</semester>
+<skills>Fsd</skills>
+<experience>commn</experience>
+</student>
+<applied_date>2026-03-30 13:58:49.0</applied_date>
+<status>Cancelled</status>
+<resume>null</resume>
+</application>
+</applications>

@@ -1,0 +1,327 @@
+:root {
+    --primary-blue: #2DA9FF;
+    --dark-blue: #0B1C2D;
+    --light-blue: #E6F4FF;
+    --border-color: #ddd;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --success-green: #28a745;
+    --error-red: #ff4444;
+    --warning-yellow: #ffaa44;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;   /* IMPORTANT for long forms */
+    padding: 30px 15px;
+    background: url('images/44.jpg') center/cover no-repeat fixed;
+}
+.signup-link{
+    margin-top: 10px;
+    text-align: center;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 0;
+}
+.form-actions{
+    padding: 0 20px;
+}
+/* ===== MAIN CONTAINER ===== */
+.container,
+.profile-container {
+    width: 100%;
+    max-width: 700px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    z-index: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== HEADER ===== */
+.header,
+.form-header {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    color: #fff;
+    padding: 25px;
+    text-align: center;
+}
+
+.header h1,
+.form-header h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.header p,
+.form-header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* ===== FORM SECTIONS ===== */
+.form-section {
+    padding: 25px;
+    border-bottom: 1px solid #eee;
+}
+
+/* REMOVE LAST BORDER */
+.form-section:last-child {
+    border-bottom: none;
+}
+
+/* ===== GRID ===== */
+.form-row {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 220px;
+    margin-bottom: 18px;
+}
+
+/* ===== LABEL ===== */
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: var(--dark-blue);
+    font-weight: 500;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: auto;
+}
+/* ===== INPUTS ===== */
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+/* FOCUS EFFECT */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(45,169,255,0.2);
+    outline: none;
+}
+
+/* ===== BUTTON ===== */
+button,
+.btn-login,
+.btn-signup {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+     margin: 0;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-container {
+    padding: 20px;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #ccc;
+    color: #fff;
+    line-height: 30px;
+    margin: auto;
+}
+
+.step.active .step-number {
+    background: var(--primary-blue);
+}
+
+.step-label {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.progress-bar {
+    height: 5px;
+    background: #ddd;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-blue);
+}
+/* ===== PASSWORD STRENGTH ===== */
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+}
+
+/* Strength bars container */
+.strength-bars {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+}
+
+/* Individual bars */
+.strength-bar {
+    flex: 1;
+    height: 5px;
+    background: #ddd;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Active bars */
+.strength-bar.active:nth-child(1) { background: var(--error-red); }
+.strength-bar.active:nth-child(2) { background: var(--warning-yellow); }
+.strength-bar.active:nth-child(3) { background: #17a2b8; }
+.strength-bar.active:nth-child(4) { background: var(--success-green); }
+
+/* Strength text */
+.strength-text {
+    margin-top: 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Text colors */
+.strength-text.very-weak { color: var(--error-red); }
+.strength-text.weak { color: #ff6b6b; }
+.strength-text.fair { color: var(--warning-yellow); }
+.strength-text.good { color: #17a2b8; }
+.strength-text.strong { color: var(--success-green); }
+
+/* Confirm password */
+.confirm-password-match {
+    border-color: var(--success-green);
+}
+
+.confirm-password-no-match {
+    border-color: var(--error-red);
+}
+/* ===== LOGO UPLOAD ===== */
+.logo-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.logo-preview {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;   /* ✅ FIX */
+    position: relative;
+}
+
+/* FIX IMAGE SIZE */
+.logo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    display: none;
+}
+
+/* ===== VALIDATION ===== */
+.input-error { border-color: var(--error-red); }
+.input-valid { border-color: var(--success-green); }
+
+.btn-danger {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    border: 2px solid #e0e0e0;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #ff4444, #cc0000);
+    color: white;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+    .form-row {
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,56 @@
+Name: jee
+Email: jee@gmail.com
+Internship Type: Web Development
+Rating: 1
+Comments: good
+Suggestions: nil
+Date: Mon Mar 09 14:20:12 IST 2026
+----------------------------------
+Name: preethi
+Email: preethi@gmail.com
+Internship Type: Web Development
+Rating: 5
+Comments: nice
+Suggestions: nil
+Date: Tue Mar 10 09:26:19 IST 2026
+----------------------------------
+Name: a
+Email: p@gmail.com
+Internship Type: Web Development
+Rating: 1
+Comments: a
+Suggestions: a
+Date: Tue Mar 10 09:30:59 IST 2026
+----------------------------------
+Name: s
+Email: p@gmail.com
+Internship Type: Web Development
+Rating: 
+Comments: 2
+Suggestions: 1
+Date: Tue Mar 10 10:49:42 IST 2026
+----------------------------------
+Name: preethi
+Email: preethi@gmail.com
+Internship Type: Mobile Development
+Rating: 5
+Comments: Good
+Suggestions: Nothing
+Date: Sat Mar 14 11:26:52 IST 2026
+----------------------------------
+Name: s
+Email: s@gmail.com
+Internship Type: Web Development
+Rating: 3
+Comments: x
+Suggestions: x
+Date: Sat Mar 14 11:32:16 IST 2026
+----------------------------------
+Name: z
+Email: s@gmail.com
+Internship Type: Web Development
+Rating: 2
+Comments: z
+Suggestions: z
+Date: Sat Mar 14 11:35:07 IST 2026
+----------------------------------

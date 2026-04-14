@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Internship Portal Chatbot</title>
+<link rel="stylesheet" href="css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+}
+
+:root{
+--primary-blue:#2DA9FF;
+--dark-blue:#0B1C2D;
+--light-blue:#E6F4FF;
+--border-color:#ddd;
+--gradient:linear-gradient(135deg,var(--dark-blue) 0%,var(--primary-blue) 100%);
+--shadow:0 10px 40px rgba(11,28,45,0.1);
+}
+
+body{
+background:url('images/44.jpg') no-repeat center center fixed;
+background-size:cover;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px;
+position:relative;
+}
+
+body::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,0.5);
+z-index:1;
+}
+
+.container{
+max-width:500px;
+width:100%;
+position:relative;
+z-index:2;
+}
+
+.card{
+background:rgba(255,255,255,0.95);
+border-radius:20px;
+box-shadow:var(--shadow);
+overflow:hidden;
+}
+
+.header{
+background:var(--gradient);
+color:white;
+padding:30px;
+text-align:center;
+}
+
+.header i{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.header h1{
+font-size:22px;
+margin-bottom:5px;
+}
+
+.chat-container{
+height:350px;
+overflow-y:auto;
+padding:20px;
+background:#f8f9fa;
+}
+
+.message{
+margin-bottom:15px;
+display:flex;
+}
+
+.message.bot{
+justify-content:flex-start;
+}
+
+.message.user{
+justify-content:flex-end;
+}
+
+.message-content{
+max-width:80%;
+padding:12px 16px;
+border-radius:16px;
+font-size:14px;
+line-height:1.5;
+}
+
+.bot .message-content{
+background:white;
+color:var(--dark-blue);
+border-bottom-left-radius:5px;
+}
+
+.user .message-content{
+background:var(--gradient);
+color:white;
+border-bottom-right-radius:5px;
+}
+
+.timestamp{
+font-size:10px;
+margin-top:5px;
+opacity:0.7;
+display:block;
+}
+
+.questions-section{
+padding:15px;
+background:white;
+border-top:1px solid var(--border-color);
+}
+
+.section-title{
+font-size:14px;
+margin-bottom:10px;
+font-weight:600;
+color:var(--dark-blue);
+}
+
+.question-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+}
+
+.question-btn{
+background:var(--light-blue);
+border:none;
+padding:10px;
+border-radius:10px;
+cursor:pointer;
+font-size:13px;
+}
+
+.question-btn:hover{
+background:white;
+border:1px solid var(--primary-blue);
+}
+
+.chat-input{
+margin-top:10px;
+display:flex;
+gap:8px;
+}
+#chatIcon {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2DA9FF;
+    color: white;
+    font-size: 22px;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 9999;
+}
+
+#chatWindow {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: none; /* IMPORTANT */
+    overflow: hidden;
+    z-index: 9999;
+}
+
+#chatWindow iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.chat-input input{
+flex:1;
+padding:10px;
+border-radius:8px;
+border:1px solid var(--border-color);
+}
+
+.chat-input button{
+background:var(--gradient);
+border:none;
+color:white;
+padding:10px 14px;
+border-radius:8px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<div class="header">
+<i class="fas fa-robot"></i>
+<h1>Internship Assistant</h1>
+<p>Ask your internship questions</p>
+</div>
+
+<div class="chat-container" id="chatContainer">
+
+<div class="message bot">
+<div class="message-content">
+👋 Hello! Ask me about internships.
+<span class="timestamp" id="welcomeTime"></span>
+</div>
+</div>
+
+</div>
+
+<div class="questions-section">
+
+<div class="section-title">Quick Questions</div>
+
+<div class="question-grid">
+
+<button class="question-btn" onclick="askQuestion('register')">
+How to register?
+</button>
+
+<button class="question-btn" onclick="askQuestion('eligibility')">
+Eligibility criteria
+</button>
+
+<button class="question-btn" onclick="askQuestion('documents')">
+Required documents
+</button>
+
+<button class="question-btn" onclick="askQuestion('duration')">
+Internship duration
+</button>
+
+<button class="question-btn" onclick="askQuestion('contact')">
+Contact support
+</button>
+
+<button class="question-btn" onclick="askQuestion('stipend')">
+Is there stipend?
+</button>
+
+</div>
+
+<div class="chat-input">
+<input type="text" id="userInput" placeholder="Type your question">
+<button onclick="sendMessage()">
+<i class="fas fa-paper-plane"></i>
+</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const responses = {
+
+hi: "Welcome to the Online Internship Portal! 👋 How can I help you today?",
+hello: "Welcome to the Online Internship Portal! 😊 Ask me anything about internships.",
+bye: "Goodbye! 👋 Wish you all the best for your internships!",
+register: "To register: Visit our portal → Click Sign Up → Fill your details → Verify your email → Start applying for internships by clicking Apply Now!",
+eligibility: "Eligibility: Students above 18, currently enrolled in college, with basic skills.",
+documents: "You'll need Resume, Student ID, Transcript, and Government ID.",
+duration: "Internship durations are likely 1 month,2 months,3 months and 1 year.",
+contact: "Need help? You can reach support at 📧 support@oip.com",
+stipend: "Some internships offer a stipend 💰 depending on the company and role."
+};
+
+const defaultReply =
+"Sorry, I didn't understand. Try asking about registration, stipend, documents, eligibility, or duration.";
+
+function addMessage(message,isUser=false){
+
+const chat=document.getElementById("chatContainer");
+
+const div=document.createElement("div");
+
+div.className="message "+(isUser?"user":"bot");
+
+const time=new Date().toLocaleTimeString([],{
+hour:'2-digit',
+minute:'2-digit'
+});
+
+div.innerHTML=
+`<div class="message-content">
+${message}
+<span class="timestamp">${time}</span>
+</div>`;
+
+chat.appendChild(div);
+
+chat.scrollTop=chat.scrollHeight;
+
+}
+
+function askQuestion(key){
+
+addMessage(document.querySelector(`[onclick="askQuestion('${key}')"]`).innerText,true);
+
+setTimeout(()=>{
+addMessage(responses[key]);
+},800);
+
+}
+
+function sendMessage(){
+
+const input=document.getElementById("userInput");
+
+let text=input.value.trim().toLowerCase();
+
+if(text==="") return;
+
+addMessage(input.value,true);
+
+input.value="";
+
+let reply=defaultReply;
+
+if(text.includes("register")) reply=responses.register;
+else if(text.includes("eligibility")) reply=responses.eligibility;
+else if(text.includes("document")) reply=responses.documents;
+else if(text.includes("duration")) reply=responses.duration;
+else if(text.includes("contact")) reply=responses.contact;
+else if(text.includes("stipend")) reply=responses.stipend;
+else if(text.includes("hi")) reply=responses.hi;
+else if(text.includes("hello")) reply=responses.hello;
+else if(text.includes("bye")) reply=responses.bye;
+
+setTimeout(()=>{
+addMessage(reply);
+},800);
+
+}
+
+document.getElementById("userInput").addEventListener("keypress",function(e){
+
+if(e.key==="Enter") sendMessage();
+
+});
+
+document.getElementById("welcomeTime").textContent =
+new Date().toLocaleTimeString([],{
+hour:'2-digit',
+minute:'2-digit'
+});
+
+</script>
+
+</body>
+</html>

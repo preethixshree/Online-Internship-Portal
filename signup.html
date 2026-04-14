@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up · Online Internship Portal</title>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="auth-styles.css">
+</head>
+<body style="background-image: url('images/44.jpg');">
+    <div class="container">
+        <div class="header">
+            <h1>
+                <i class="fas fa-briefcase"></i>
+                Online Internship Portal
+            </h1>
+            <p>Create your account to get started</p>
+        </div>
+        
+        <div class="signup-form">
+            <div class="form-section">
+              <form id="signupForm" action="authservlet" method="post">
+
+                <input type="hidden" name="action" value="register">    
+
+                    <!-- Username Field -->
+                    <div class="form-group">
+                        <label for="username">
+                            <i class="fas fa-user"></i>
+                            Username
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            placeholder="Choose a username" 
+                            required
+                            minlength="3"
+                            maxlength="20"
+                        >
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label for="email">
+                            <i class="fas fa-envelope"></i>
+                            Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="Enter your email address" 
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <label for="password">
+                            <i class="fas fa-lock"></i>
+                            Password
+                        </label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                placeholder="Create a strong password" 
+                                required
+                                onkeyup="checkPasswordStrength()"
+                            >
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('password')"></i>
+                        </div>
+                        
+                        <!-- Password Strength Bars and Text -->
+                        <div class="password-strength">
+                            <div class="strength-bars">
+                                <div class="strength-bar" id="bar1"></div>
+                                <div class="strength-bar" id="bar2"></div>
+                                <div class="strength-bar" id="bar3"></div>
+                                <div class="strength-bar" id="bar4"></div>
+                            </div>
+                            <div class="strength-text" id="strengthText">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Enter password</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Confirm Password Field -->
+                    <div class="form-group">
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock"></i>
+                            Confirm Password
+                        </label>
+                        <div class="password-wrapper">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                placeholder="Re-enter your password" 
+                                required
+                                onkeyup="checkPasswordMatch()"
+                            >
+                            <i class="fas fa-eye toggle-password" onclick="togglePassword('confirmPassword')"></i>
+                        </div>
+                          <br/> <!-- Role Selection Field - Add this -->
+                         <div class="form-group">
+                            <label for="role">
+                                <i class="fas fa-user-tag"></i>
+                                 Role
+                                 </label>
+                                 <select id="role" name="role" required>
+                                  <option value="" disabled selected>Select your role</option>
+                                  <option value="student">Student</option>
+                                  <option value="company">Company</option>
+                                 </select>
+                         <div class="role-hint">
+                        <i class="fas fa-info-circle"></i>
+                         Select your account type
+                        </div>
+                    </div>
+                    </div>
+
+                    
+                    <!-- Sign Up Button -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-signup" id="signupBtn">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                        <br/>
+                        <!-- Login Link -->
+                        <div class="signup-link">
+                            Already have an account?
+                            <a href="login.jsp">Login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(fieldId) {
+            const passwordInput = document.getElementById(fieldId);
+            const toggleIcon = passwordInput.nextElementSibling;
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+            
+            if (fieldId === 'confirmPassword' || fieldId === 'password') {
+                checkPasswordMatch();
+            }
+        }
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            
+            const requirements = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[@$!%*?&#]/.test(password)
+            };
+
+            const strength = Object.values(requirements).filter(Boolean).length;
+            
+            updateStrengthBars(strength);
+            updateStrengthText(strength);
+            checkPasswordMatch();
+        }
+
+        
+        function updateStrengthBars(strength) {
+            const bars = ['bar1', 'bar2', 'bar3', 'bar4'];
+            
+            bars.forEach(bar => {
+                document.getElementById(bar).classList.remove('active');
+            });
+            
+            for (let i = 0; i < strength; i++) {
+                document.getElementById(bars[i]).classList.add('active');
+            }
+        }
+
+        function updateStrengthText(strength) {
+            const strengthDiv = document.getElementById('strengthText');
+            const strengthSpan = strengthDiv.querySelector('span');
+            
+            strengthDiv.classList.remove('very-weak', 'weak', 'fair', 'good', 'strong');
+            
+            const strengthLevels = ['Enter password', 'Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+            
+            if (strength === 0 && document.getElementById('password').value.length === 0) {
+                strengthSpan.textContent = strengthLevels[0];
+            } else {
+                strengthSpan.textContent = strengthLevels[strength];
+                
+                switch(strength) {
+                    case 1: strengthDiv.classList.add('very-weak'); break;
+                    case 2: strengthDiv.classList.add('weak'); break;
+                    case 3: strengthDiv.classList.add('fair'); break;
+                    case 4: strengthDiv.classList.add('good'); break;
+                    case 5: strengthDiv.classList.add('strong'); break;
+                }
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const confirmInput = document.getElementById('confirmPassword');
+            
+            confirmInput.classList.remove('confirm-password-match', 'confirm-password-no-match');
+            
+            if (confirmPassword.length > 0) {
+                if (password === confirmPassword) {
+                    confirmInput.classList.add('confirm-password-match');
+                } else {
+                    confirmInput.classList.add('confirm-password-no-match');
+                }
+            }
+        }
+
+        function validateRequirements() {
+            const password = document.getElementById('password').value;
+            
+            return {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                lowercase: /[a-z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[@$!%*?&#]/.test(password)
+            };
+        }
+
+function handleSignup(event) {
+    
+    
+    const username = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+    const role = document.getElementById('role').value;
+    
+    if (!username || !email || !password || !confirmPassword) {
+        alert('Please fill in all fields');
+        event.preventDefault();
+        return false;
+    }
+    
+    if (username.length < 3) {
+        alert('Username must be at least 3 characters long');
+        document.getElementById('username').classList.add('input-error');
+        event.preventDefault();
+        return false;
+    }
+    
+    if (!isValidEmail(email)) {
+        alert('Please enter a valid email address');
+        document.getElementById('email').classList.add('input-error');
+        event.preventDefault();
+        return false;
+    }
+    
+    const reqs = validateRequirements();
+    if (!reqs.length || !reqs.uppercase || !reqs.lowercase || !reqs.number || !reqs.special) {
+        alert('Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character (@$!%*?&#)');
+        event.preventDefault();
+        return false;
+    }
+    
+    if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        event.preventDefault();
+        return false;
+    }
+    
+    if (!role) {
+        alert('Please select your role');
+        document.getElementById('role').classList.add('input-error');
+        event.preventDefault();
+        return false;
+    }
+    
+    return true;
+}
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        document.querySelectorAll('.form-group input').forEach(field => {
+            field.addEventListener('invalid', (e) => {
+                e.preventDefault();
+                field.classList.add('input-error');
+            });
+            
+            field.addEventListener('input', function() {
+                if (this.id !== 'confirmPassword') {
+                    this.classList.remove('input-error', 'input-valid', 'input-warning');
+                }
+            });
+        });
+
+        document.getElementById('username').addEventListener('input', function() {
+            this.classList.remove('input-valid', 'input-warning', 'input-error');
+            if (this.value.length < 3 && this.value.length > 0) {
+                this.classList.add('input-warning');
+            } else if (this.value.length >= 3) {
+                this.classList.add('input-valid');
+            }
+        });
+
+        document.getElementById('email').addEventListener('input', function() {
+            this.classList.remove('input-valid', 'input-warning', 'input-error');
+            if (this.value.length > 0) {
+                if (isValidEmail(this.value)) {
+                    this.classList.add('input-valid');
+                } else {
+                    this.classList.add('input-warning');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
