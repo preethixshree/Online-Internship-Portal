@@ -1,7 +1,7 @@
 <?php
-$host = "127.0.0.1";
-$user = "root";
-$pass = "2005";
+$host = "localhost";
+$user = "";
+$pass = "";
 $dbname = "oipwt";
 $port = 3306;
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
